@@ -39,6 +39,8 @@ const Newsapp = () => {
                 <a style={{fontWeight:600, fontSize:"17px"}}>Trending</a>
 
             </ul>
+
+
             <div className='searchBar'>
                 <input type='text' placeholder='Search News' value={search} onChange={handleInput}/>
                 <button onClick={getData}>Search</button>
