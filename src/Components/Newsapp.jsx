@@ -1,35 +1,25 @@
-// Newsapp.js
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
 
 const Newsapp = () => {
   const [search, setSearch] = useState("india");
   const [newsData, setNewsData] = useState(null);
-  const API_KEY = "08d5cda76cb84d149f916a9ae546d706";
+  const API_KEY = "799ee9e377773a1727f7d89c153b72ec"; 
 
   const getData = async () => {
     try {
-      const response = await fetch(`https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`);
+      const response = await fetch(`https://gnews.io/api/v4/search?q=${search}&token=${API_KEY}`);
       const jsonData = await response.json();
 
-      // Print the full JSON response to check for errors or missing data
       console.log("API Response:", jsonData);
 
-      // Check if the response has a "status" field and if it indicates an error
-      if (jsonData.status !== "ok") {
-        console.error("API Error:", jsonData.message || "Unknown error");
-        setNewsData([]); // Set to empty array to avoid errors in the Card component
-        return;
-      }
-
-      // Proceed only if jsonData.articles exists and is an array
       if (jsonData.articles && Array.isArray(jsonData.articles)) {
         console.log("Articles found:", jsonData.articles);
-        let dt = jsonData.articles.slice(0, 10);
+        let dt = jsonData.articles.slice(0, 10); 
         setNewsData(dt);
       } else {
         console.log("No articles found");
-        setNewsData([]); // Set to empty array if articles are not found
+        setNewsData([]); 
       }
     } catch (error) {
       console.error("Error fetching data:", error);
